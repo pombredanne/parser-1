@@ -46,7 +46,7 @@ module Parser
     CurrentRuby = Ruby21
 
   when /^2\.2\./
-    current_version = '2.2.5'
+    current_version = '2.2.6'
     if RUBY_VERSION != current_version
       warn_syntax_deviation 'parser/ruby22', current_version
     end
@@ -55,7 +55,7 @@ module Parser
     CurrentRuby = Ruby22
 
   when /^2\.3\./
-    current_version = '2.3.1'
+    current_version = '2.3.3'
     if RUBY_VERSION != current_version
       warn_syntax_deviation 'parser/ruby23', current_version
     end
@@ -64,7 +64,7 @@ module Parser
     CurrentRuby = Ruby23
 
   when /^2\.4\./
-    current_version = 'HEAD'
+    current_version = '2.4.0'
     if RUBY_VERSION != current_version
       warn_syntax_deviation 'parser/ruby24', current_version
     end
@@ -74,8 +74,8 @@ module Parser
 
   else # :nocov:
     # Keep this in sync with released Ruby.
-    warn_syntax_deviation 'parser/ruby23', '2.3.x'
-    require 'parser/ruby22'
-    CurrentRuby = Ruby22
+    warn_syntax_deviation 'parser/ruby24', '2.4.x'
+    require 'parser/ruby24'
+    CurrentRuby = Ruby24
   end
 end

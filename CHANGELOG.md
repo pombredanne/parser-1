@@ -1,6 +1,66 @@
 Changelog
 =========
 
+v2.4.0.0 (2017-02-07)
+---------------------
+
+API modifications:
+ * parser/current: update for the 2.4 release. (whitequark)
+ * rubymotion.y: "a&.b": implement safe navigation operator in RubyMotion. (Mark Villacampa)
+
+Bugs fixed:
+ * lexer.rl: "a &. b": accept &. in EXPR_ARG also. (whitequark)
+
+v2.3.3.1 (2016-12-02)
+---------------------
+
+API modifications:
+ * parser/current: update 2.2 warning to 2.2.6 (Jordan Moncharmont)
+
+v2.3.3.0 (2016-11-28)
+---------------------
+
+API modifications:
+ * parser/current: update 2.3 branch to 2.3.3. (Philip Arndt)
+
+Bugs fixed:
+ * ruby24.y: "a += b += raise :x": fix errors with chained op-assignments. (whitequark)
+ * ruby24.y: "p p{p(p);p p}, tap do end": preserve cmdarg stack. (whitequark)
+ * ruby24.y: "a b{c d}, :e do end": go to EXPR_ENDARG after literal. (whitequark)
+
+v2.3.2.0 (2016-11-20)
+---------------------
+
+API modifications:
+ * parser/current: update 2.3 branch to 2.3.2. (whitequark)
+ * Introduce (procarg0) node for a single required block argument. (Ilya Bylich)
+
+Bugs fixed:
+ * {macruby,ruby{19,20,21,22,23,24}}.y: "x::A += m x": treat as constant assignment. (whitequark)
+ * ruby24.y: "x += raise y rescue nil": bind rescue tighter than tOP_ASGN. (whitequark)
+ * ruby24.y: "x = raise y rescue nil": bind rescue tighter than =. (whitequark)
+ * Builders::Default: "begin; else; 1; end": fix a crash. (whitequark)
+
+v2.3.1.4 (2016-09-19)
+---------------------
+
+v2.3.1.3 (2016-09-17)
+---------------------
+
+API modifications:
+ * parser/current: latest 2.3 release is 2.3.2. (Chris Riddoch)
+
+Features implemented:
+ * ruby24.y: "f (g rescue nil)": allow stmt after tLPAREN_ARG. (whitequark)
+
+Bugs fixed:
+ * ruby{18,19,20,21,22,23,24}.y: parse trailing commas as mlhs for block args "a.b{ |c,| d }" (fixes #312) (John Backus)
+ * Builders::Default: "begin; 1; else; 2; end": do not drop else. (whitequark)
+ * Builders::Default: "a&.b &&= c": fix safe navigation in lhs of op-assignment. (Ilya Bylich)
+ * AST::Processor: handle "csend" as "send". (#301) (Ilya Bylich)
+ * Parser::AST::Processor: do not spuriously modify ASTs. (Ilya Bylich)
+ * lexer.rl: "%w\a b\": lex backslash-delimited words literals. (Masataka Kuwabara)
+
 v2.3.1.2 (2016-06-02)
 ---------------------
 
@@ -72,7 +132,7 @@ Bugs fixed:
  * Add :csend to Parser::Meta::NODE_TYPES (Markus Schirp)
  * lexer/dedenter: "\<\<x\n  y\\n  z\nx": don't dedent after escaped newline. (whitequark)
 
-v2.3.1.2 (2016-01-16)
+v2.4.0.0 (2016-01-16)
 ---------------------
 
 v2.3.0.1 (2016-01-14)

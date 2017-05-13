@@ -1490,6 +1490,8 @@ class Parser::Lexer
                   ( '=' | c_space_nl )?    |
       # x rescue y: Modifier keyword.
       w_space* keyword_modifier            |
+      # a &. b: Safe navigation operator.
+      w_space* '&.'                        |
       # Miscellanea.
       w_space* punctuation_end
       => {
@@ -1565,8 +1567,15 @@ class Parser::Lexer
   # `do` (as `kDO_BLOCK` in `expr_beg`).
   expr_endarg := |*
       e_lbrace
-      => { emit(:tLBRACE_ARG, '{'.freeze)
-           fnext expr_value; };
+      => {
+        if @lambda_stack.last == @paren_nest
+          @lambda_stack.pop
+          emit(:tLAMBEG, '{'.freeze)
+        else
+          emit(:tLBRACE_ARG, '{'.freeze)
+        end
+        fnext expr_value;
+      };
 
       'do'
       => { emit_do(true)

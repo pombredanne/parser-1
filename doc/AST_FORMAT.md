@@ -912,6 +912,25 @@ Format:
 
 Begin of the `expression` points to `&`.
 
+### Auto-expanding proc argument (1.9)
+
+In Ruby 1.9 and later, when a proc-like closure (i.e. a closure
+created by capturing a block or with the `proc` method, but not
+with the `->{}` syntax or the `lambda` method) has exactly one
+argument, and it is called with more than one argument, the behavior
+is as if the array of all arguments was instead passed as the sole
+argument. This behavior can be prevented by adding a comma after
+the sole argument (e.g. `|foo,|`).
+
+Format:
+
+~~~
+(procarg0 :foo)
+"|foo|"
+  ~~~ expression
+  ~~~ name
+~~~
+
 ### Expression arguments
 
 Ruby 1.8 allows to use arbitrary expressions as block arguments,
